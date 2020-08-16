@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "userList";
+}
+@model IEnumerable<LastOne.Models.Entity.Number>
+@foreach (var item in Model)
+{
+    <h2>User's Name: @item.user.UserName</h2>
+    <p>Father's name: @item.user.FatherName</p>
+    <p>User's Role: @item.user.Role.RoleName</p>
+    @foreach (var number in Model)
+    {
+        if (number.UserId==item.user.Id)
+        {
+            <p>@number.phoneNumber</p>
+        }
+    }
+}
+
+<a href="@Url.Action("Index","Home")">Roles</a>
+<a href="@Url.Action("createUser","Home")">Roles</a>
