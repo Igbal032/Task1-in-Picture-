@@ -40,23 +40,29 @@ namespace LastOne.Controllers
             ViewData["roles"] = db.roles.ToList();
             return View();
         }
-        public IActionResult addUserSubmit(User user, string phoneNumber) 
+        public IActionResult addUserSubmit(User user, string[] phoneNumber) 
         {
             db.users.Add(user);
             db.SaveChanges();
-            var newPhone = new Number();
-            newPhone.phoneNumber = phoneNumber;
-            newPhone.UserId = user.Id;
-            db.numbers.Add(newPhone);
+            foreach (var item in phoneNumber)
+            {
+                var newPhone = new Number();
+                newPhone.phoneNumber = item;
+                newPhone.UserId = user.Id;
+                db.numbers.Add(newPhone);
+            }
             db.SaveChanges();
 
             return RedirectToAction("userList","Home");
         }
         public IActionResult userList() 
         {
+            var allUser = db.users.ToList();
             var numberToUser = db.numbers.Include(w => w.user).Include(w=>w.user.Role).ToList();
-            return View(numberToUser);
+            ViewData["numbers"] = numberToUser;
+            return View(allUser);
         }
+
 
 
         public IActionResult Privacy()

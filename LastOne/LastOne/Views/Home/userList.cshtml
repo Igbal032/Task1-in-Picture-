@@ -1,21 +1,28 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "userList";
 }
-@model IEnumerable<LastOne.Models.Entity.Number>
-@foreach (var item in Model)
-{
-    <h2>User's Name: @item.user.UserName</h2>
-    <p>Father's name: @item.user.FatherName</p>
-    <p>User's Role: @item.user.Role.RoleName</p>
-    @foreach (var number in Model)
-    {
-        if (number.UserId==item.user.Id)
+@model IEnumerable<LastOne.Models.Entity.User>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
         {
-            <p>@number.phoneNumber</p>
+
+            <div class="col-md-4 col-xl-4 col-lg-4 col-xs-12">
+                <h2>User's Name: @item.UserName</h2>
+                <p>Father's name: @item.FatherName</p>
+                <p>User's Role: @item.Role.RoleName</p>
+                @foreach (var number in ViewData["numbers"] as List<LastOne.Models.Entity.Number>)
+                {
+                    if (number.UserId == item.Id)
+                    {
+                        <p>@number.phoneNumber</p>
+                    }
+                }
+            </div>
         }
-    }
-}
+
+    </div>
+</div>
 
 <a href="@Url.Action("Index","Home")">Roles</a>
-<a href="@Url.Action("createUser","Home")">Roles</a>
+<a href="@Url.Action("createUser","Home")">Add User</a>

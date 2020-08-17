@@ -16,6 +16,7 @@
         <button type="submit" class="btn btn-primary mt-5">Submit</button>
     </form>
     <br />
+    <label>Roles: </label>
     <select>
         @foreach (var item in Model)
         {
@@ -23,5 +24,6 @@
         }
     </select>
     <br />
-    <a href="@Url.Action("createUser","Home")" class="btn btn-success">Add user</a>
+    <a href="@Url.Action("createUser","Home")" class="btn btn-success mt-3">Add user</a>
+    <a href="@Url.Action("userList","Home")" class="btn btn-success mt-3">Show all users</a>
 </section>
