@@ -1,0 +1,63 @@
+﻿@if (!string.IsNullOrWhiteSpace(ViewBag.notExit))
+{
+    <p>@ViewBag.notExit</p>
+}
+@model List<LastTask.Models.Identity.PromediRole>
+
+<form method="post" action="userRegister">
+    <label>
+        UserName
+        <input type="text" name="userName" placeholder="Enter username or email" />
+    </label>
+    <br />
+    <label>
+        Father's name
+        <input type="text" name="fatherName" placeholder="Enter father's name" />
+    </label><br />
+    <label>
+        Number
+        <input type="text" name="number" placeholder="Enter phone number" />
+    </label>
+    @if (!string.IsNullOrWhiteSpace(ViewBag.emptyNumber))
+    {
+        <p>@ViewBag.emptyNumber</p>
+    }
+    <br />
+    <label>Roles:</label>
+    <select name="roleName">
+        @foreach (var item in Model)
+        {
+            <option value="@item.Name">@item.Name</option>
+        }
+    </select>
+    <button type="submit">Create User</button>
+    @if (!string.IsNullOrWhiteSpace(ViewBag.existUser))
+    {
+        <p>@ViewBag.existUser</p>
+    }
+    @if (!string.IsNullOrWhiteSpace(ViewBag.emptyInputs))
+    {
+        <p>@ViewBag.emptyInputs</p>
+    }
+</form>
+<hr />
+<h2>Create Role</h2>
+<form action="@Url.Action("AddRole","Account")" method="post">
+    <label>
+        UserName
+        <input type="text" name="RoleName" placeholder="Enter role's name" />
+    </label>
+    <br />
+    <button type="submit">Create Role</button>
+    @if (!string.IsNullOrWhiteSpace(ViewBag.emptyInput))
+    {
+        <p>@ViewBag.emptyInput</p>
+    }
+</form>
+
+<select name="roleName">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Name">@item.Name</option>
+    }
+</select>
